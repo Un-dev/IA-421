@@ -41,15 +41,22 @@ STATES = [
     "2": 2
   }]
 
-# def reward(state, action):
+def reward(state, action):
+  # regarder tout les etats et le(s) qu'on ne relance pas
+  # en deduire quels sont les prochains états possible
+  # faire la somme des moyennes des (points possibles * (1/6)^n)
+  # (∑ pi*(1/6)^n)/i
+  for i, item in enumerate(action):
+    if ()
 
 def transition(state, action):
-  # print(state["0"])
   for i, item in enumerate(action):
     if (item == True):
       state[str(i)] = random.randint(1,6)
 
   return state
+
+def valueIteration(state, action):
 
 #avec l'etat 456 je relance le dé 2 et 3
 
