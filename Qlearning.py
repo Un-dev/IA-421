@@ -97,7 +97,7 @@ def stateIndex(state):
 
 #calculates new Q for given state and action pair
 def newQValue(Q, state, action):
-  new_value = gameGrid6.rewards(state, action) + GAAM*0
+  new_value = gameGrid6.rewards(state, action) #+ GAAM*0
   return (1-learning_rate) * Q[action][stateIndex(state)] + learning_rate * (new_value)
 
 def updateQtable(value, action, state, Q):
