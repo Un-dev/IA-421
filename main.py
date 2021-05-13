@@ -6,17 +6,20 @@ STATES = [
     "Récompense": 800,
     0: 1,
     1: 2,
-    2: 4}, 
+    2: 4
+  }, 
   {
     "Récompense": 700,
     0: 1,
     1: 1,
-    2: 1}, 
+    2: 1
+  }, 
   {
     "Récompense": 203,
     0: 1,
     1: 2,
-    2: 3}, 
+    2: 3
+  }, 
   {
     "Récompense": 204,
     0: 2,
@@ -71,32 +74,7 @@ def transition(state, action):
 
   return state
 
-def valueIteration(states, actions, transitions, rewards, epsilon, gamma):
-    delta=1
-    V= { for i, item in }
-    i= 1
-    while not delta<epsilon:
-        delta=0
-        for s in states:
-            v = V[s]
-            maxAction = float('-inf') 
-            for a in actions:
-                Q = value(V, s, a, transitions, rewards, gamma)
-                if Q > maxAction :
-                    maxAction = Q
-            V[s]= maxAction
-            delta = max( [delta, abs(V[s]-v)] )
-        print( "Values (it_"+ str(i) +") " + str(V) + " ; delta : " + str(delta) )
-        i += 1
-    return V
-
-def value(V, state, action, transitions, rewards, gamma):
-    proba = transitions(state, action) 
-    va = rewards(state, action) + gamma * sum([proba[next_state] * V[next_state] for next_state in proba])
-    return va
-
 #avec l'etat 456 je relance le dé 2 et 3
 
-print(transition([4, 1, 6], [False, True, True]))
+print(transition([4, 5, 6], [False, True, True]))
 print(reward(sorted([2, 4, 1]), True))
-print valueIteration(STATES, ACTIONS, transition, reward, EPSILON, GAMMA)
