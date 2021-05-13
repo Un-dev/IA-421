@@ -70,13 +70,21 @@ GAMMA = 0.9
 EPSILON = 0.1
 
 def reward(state, last):
+  # reward is given only for the last rolls
   if (last == False):
     return 0
   else:
     for i, item in enumerate(STATES):
+      # if state is part of the STATES constant we just return the reward
       if(STATES[i][0] == state[0] and STATES[i][1] == state[1] and STATES[i][2] == state[2]): 
         return STATES[i]["Récompense"]
-    return 100+state[maxindex(state)]
+    # else it means we are in special cases
+    if (state[0] == 1 and state[1] == 1)
+      return 400+state[2]
+    else if (state[0] == state[1] and state[1] == state[0])
+      return 300 + state[0]
+    else 
+      return 100+state[2]
     
 
 def transition(state, action):
@@ -101,7 +109,7 @@ print(transition([4, 5, 6], [False, True, True]))
 print(reward(sorted([2, 4, 1]), last=True))
 
 def learn_episode()
-  # un episode est composé de 3 lancé
+  # an episode is composed of 3 dice rolls
   for i in range(0, 3):
     if (epsilon_greedy(EPSILON)){
       # if e_greedy returns true we explore
@@ -112,15 +120,16 @@ def learn_episode()
     }
 
 # plays a random action and updates Q_table 
-def explore()
-  # chooses random number between 0 and 7
+def explore(state)
+  # chooses random number between 0 and 7, that will be our action to execute
   # changes the state
   # updates q_table
   pass
 
 # chooses the best action according to Q_table
-def exploit()
+def exploit(state)
   # takes the given state and iterates over q_table's corresponding index
+
   # finds the index of the best action
   # plays it 
   pass
