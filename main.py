@@ -105,7 +105,16 @@ def learn_episode()
   for i in range(0, 3):
     if (epsilon_greedy(EPSILON)){
       # if e_greedy returns true we explore
+      explore()
     } else {
       # otherwise we exploit
+      exploit()
     }
 
+# plays a random action and updates Q_table 
+def explore()
+  pass
+
+# chooses the best action according to Q_table
+def exploit()
+  pass
