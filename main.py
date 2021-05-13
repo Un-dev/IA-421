@@ -56,14 +56,15 @@ ACTIONS = [
 ]
 
 q_table = {
-  0: [0,0,0,0,0,0],
-  1: [0,0,0,0,0,0],
-  2: [0,0,0,0,0,0],
-  3: [0,0,0,0,0,0],
-  4: [0,0,0,0,0,0],
-  5: [0,0,0,0,0,0],
-  6: [0,0,0,0,0,0],
-  7: [0,0,0,0,0,0],
+  0: [0,0,0,0,0,0,0,0,0,0],
+  1: [0,0,0,0,0,0,0,0,0,0],
+  2: [0,0,0,0,0,0,0,0,0,0],
+  3: [0,0,0,0,0,0,0,0,0,0],
+  4: [0,0,0,0,0,0,0,0,0,0],
+  5: [0,0,0,0,0,0,0,0,0,0],
+  6: [0,0,0,0,0,0,0,0,0,0],
+  7: [0,0,0,0,0,0,0,0,0,0],
+
 }
 
 GAMMA = 0.9
@@ -80,10 +81,13 @@ def reward(state, last):
         return STATES[i]["Récompense"]
     # else it means we are in special cases
     if (state[0] == 1 and state[1] == 1)
+      # 11x -> 400 pts + x
       return 400+state[2]
     else if (state[0] == state[1] and state[1] == state[0])
+      # xxx -> 300 + x
       return 300 + state[0]
     else 
+      # else 100 + highest dice
       return 100+state[2]
     
 
@@ -129,11 +133,24 @@ def explore(state)
 # chooses the best action according to Q_table
 def exploit(state)
   # takes the given state and iterates over q_table's corresponding index
-
+  state_idx = index_of_state(state)
+  state_column = [q_table[][state] ]
   # finds the index of the best action
+  best_action_index = q_table
   # plays it 
   pass
 
+def index_of_state(state)
+  for i, item in enumerate(STATES):
+    if(STATES[i][0] == state[0] and STATES[i][1] == state[1] and STATES[i][2] == state[2]):
+      return i
+  if (state[0] == 1 and state[1] == 1)
+    return 7
+  else if (state[0] == state[1] and state[1] == state[0])
+    return 8
+  else 
+    return 9
+     
 def update_q_table(value, state, action)
   # change the value of q_table for state/action couple
   pass

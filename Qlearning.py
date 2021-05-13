@@ -23,7 +23,6 @@ def exploit(state, Q):
   stateIdx = stateIndex(state)
   s_actions = [Q["up"][stateIdx], Q["down"][stateIdx], Q["right"][stateIdx], Q["left"][stateIdx]]
   action = action_from_index(s_actions.index(max(s_actions)))
-  print("exploitation vers : "+action)
   value = newQValue(Q, state, action )
   Q = updateQtable(value, action, state, Q)
   return transitions(state, action)
