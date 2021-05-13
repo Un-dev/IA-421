@@ -54,6 +54,18 @@ ACTIONS = [
   [True, True, False],
   [True, True, True]
 ]
+
+q_table = {
+  0: [0,0,0,0,0,0],
+  1: [0,0,0,0,0,0],
+  2: [0,0,0,0,0,0],
+  3: [0,0,0,0,0,0],
+  4: [0,0,0,0,0,0],
+  5: [0,0,0,0,0,0],
+  6: [0,0,0,0,0,0],
+  7: [0,0,0,0,0,0],
+}
+
 GAMMA = 0.9
 EPSILON = 0.1
 
@@ -74,7 +86,26 @@ def transition(state, action):
 
   return state
 
+#chooses whether to explore or exploit
+def epsilon_greedy(e):
+  #exploitation
+  if random.uniform(0, 1) > e:
+    return False
+  #exploration
+  else:
+    return True
+
 #avec l'etat 456 je relance le dé 2 et 3
 
 print(transition([4, 5, 6], [False, True, True]))
-print(reward(sorted([2, 4, 1]), True))
+print(reward(sorted([2, 4, 1]), last=True))
+
+def learn_episode()
+  # un episode est composé de 3 lancé
+  for i in range(0, 3):
+    if (epsilon_greedy(EPSILON)){
+      # if e_greedy returns true we explore
+    } else {
+      # otherwise we exploit
+    }
+

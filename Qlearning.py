@@ -4,24 +4,11 @@ import gameGrid6
 import random 
 
 current_state = "s1"
-q_table = {
-  "up": [0,0,0,0,0,0],
-  "down": [0,0,0,0,0,0],
-  "right": [0,0,0,0,0,0],
-  "left": [0,0,0,0,0,0],
-}
 
 
 learning_rate = 0.1
 
-#chooses whether to explore or exploit
-def epsilonGreedy(e):
-  #exploitation
-  if random.uniform(0, 1) > e:
-    return 0
-  #exploration
-  else:
-    return 1
+
 
 #chooses a random action and plays it
 def explore(state, Q):
