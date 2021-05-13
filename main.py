@@ -113,8 +113,18 @@ def learn_episode()
 
 # plays a random action and updates Q_table 
 def explore()
+  # chooses random number between 0 and 7
+  # changes the state
+  # updates q_table
   pass
 
 # chooses the best action according to Q_table
 def exploit()
+  # takes the given state and iterates over q_table's corresponding index
+  # finds the index of the best action
+  # plays it 
+  pass
+
+def update_q_table(value, state, action)
+  # change the value of q_table for state/action couple
   pass

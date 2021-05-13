@@ -28,34 +28,6 @@ def exploit(state, Q):
   Q = updateQtable(value, action, state, Q)
   return transitions(state, action)
 
-
-#given an index, return the name of an action
-def action_from_index(index):
-  if (index == 0):
-    return "up"
-  elif (index == 1):
-    return "down"
-  elif (index == 2):
-    return "right"
-  elif (index == 3):
-    return "left"
-
-#given an index, return the name of a state
-def stateIndex(state):
-
-  if (state == "s0"):
-    return 0
-  elif (state == "s1"):
-    return 1
-  elif (state == "s2"):
-    return 2
-  elif (state == "s3"):
-    return 3
-  elif (state == "s4"):
-    return 4
-  else:
-    return 5
-
 #calculates new Q for given state and action pair
 def newQValue(Q, state, action):
   new_value = gameGrid6.rewards(state, action) #+ GAAM*0
