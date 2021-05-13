@@ -69,6 +69,7 @@ q_table = {
 
 GAMMA = 0.9
 EPSILON = 0.1
+learning_rate = 0.1
 
 def reward(state, last):
   # reward is given only for the last rolls
@@ -114,7 +115,7 @@ print(reward(sorted([2, 4, 1]), last=True))
 
 def learn_episode():
   # an episode is composed of 3 dice rolls
-  current_state
+  current_state = 0
   for i in range(0, 3):
     if (epsilon_greedy(EPSILON)):
       # if e_greedy returns true we explore
@@ -122,13 +123,21 @@ def learn_episode():
     else: 
       # otherwise we exploit
       current_state = exploit()
+    return current_state
     
 
 # plays a random action and updates Q_table 
 def explore(state):
   # chooses random number between 0 and 7, that will be our action to execute
+  action = ACTIONS[random.randint(0,7)]
+  print("exploitation vers : "+action)
   # changes the state
+  next_state = transition(state, action)
+  state_index = index_of_state(state)
+  action_index = index_of_action(action)
   # updates q_table
+  update_q_table(state_index, action_index, next_state)
+
   pass
 
 # chooses the best action according to Q_table
@@ -142,7 +151,7 @@ def exploit(state):
   best_action_index = state_actions_values.index(max(state_actions_values))
   # plays it 
   action_to_play = ACTIONS[best_action_index]
-  next_state = transition(action, state)
+  next_state = transition(state,action_to_play)
   return next_state
 
 def index_of_state(state):
@@ -155,7 +164,25 @@ def index_of_state(state):
     return 8
   else: 
     return 9
-     
-def update_q_table(value, state, action):
+
+def index_of_action(action):
+  for i, item in enumerate(ACTIONS):
+    if(ACTIONS[i][0] == action[0] and ACTIONS[i][1] == action[1] and ACTIONS[i][2] == action[2]):
+      return i
+
+def best_action_index(state):
+  # takes the given state and iterates over q_table's corresponding index
+  state_idx = index_of_state(state)
+  state_actions_values = [q_table[0][state_idx]]
+  for i in range(0, len(q_table)):
+    state_actions_values = [q_table[i][state_idx]]
+  # finds the index of the best action
+  return  state_actions_values.index(max(state_actions_values))
+
+
+def update_q_table(state, action, next_state):
   # change the value of q_table for state/action couple
-  pass
+  best_next_action= best_action_index(next_state)
+  Qvalue = (1-learning_rate) * q_table[state][action] + learning_rate(reward(STATES[state],ACTIONS[action]) + GAMMA*q_table[next_state][best_next_action])
+
+  return Qvalue
