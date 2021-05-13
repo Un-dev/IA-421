@@ -80,13 +80,13 @@ def reward(state, last):
       if(STATES[i][0] == state[0] and STATES[i][1] == state[1] and STATES[i][2] == state[2]): 
         return STATES[i]["Récompense"]
     # else it means we are in special cases
-    if (state[0] == 1 and state[1] == 1)
+    if (state[0] == 1 and state[1] == 1):
       # 11x -> 400 pts + x
       return 400+state[2]
-    else if (state[0] == state[1] and state[1] == state[0])
+    elif (state[0] == state[1] and state[1] == state[0]):
       # xxx -> 300 + x
       return 300 + state[0]
-    else 
+    else: 
       # else 100 + highest dice
       return 100+state[2]
     
@@ -112,45 +112,50 @@ def epsilon_greedy(e):
 print(transition([4, 5, 6], [False, True, True]))
 print(reward(sorted([2, 4, 1]), last=True))
 
-def learn_episode()
+def learn_episode():
   # an episode is composed of 3 dice rolls
+  current_state
   for i in range(0, 3):
-    if (epsilon_greedy(EPSILON)){
+    if (epsilon_greedy(EPSILON)):
       # if e_greedy returns true we explore
       explore()
-    } else {
+    else: 
       # otherwise we exploit
-      exploit()
-    }
+      current_state = exploit()
+    
 
 # plays a random action and updates Q_table 
-def explore(state)
+def explore(state):
   # chooses random number between 0 and 7, that will be our action to execute
   # changes the state
   # updates q_table
   pass
 
 # chooses the best action according to Q_table
-def exploit(state)
+def exploit(state):
   # takes the given state and iterates over q_table's corresponding index
   state_idx = index_of_state(state)
-  state_column = [q_table[][state] ]
+  state_actions_values = [q_table[0][state_idx]]
+  for i in range(0, len(q_table)):
+    state_actions_values = [q_table[i][state_idx]]
   # finds the index of the best action
-  best_action_index = q_table
+  best_action_index = state_actions_values.index(max(state_actions_values))
   # plays it 
-  pass
+  action_to_play = ACTIONS[best_action_index]
+  next_state = transition(action, state)
+  return next_state
 
-def index_of_state(state)
+def index_of_state(state):
   for i, item in enumerate(STATES):
     if(STATES[i][0] == state[0] and STATES[i][1] == state[1] and STATES[i][2] == state[2]):
       return i
-  if (state[0] == 1 and state[1] == 1)
+  if (state[0] == 1 and state[1] == 1):
     return 7
-  else if (state[0] == state[1] and state[1] == state[0])
+  elif (state[0] == state[1] and state[1] == state[0]):
     return 8
-  else 
+  else: 
     return 9
      
-def update_q_table(value, state, action)
+def update_q_table(value, state, action):
   # change the value of q_table for state/action couple
   pass
