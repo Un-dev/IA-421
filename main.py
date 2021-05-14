@@ -186,3 +186,7 @@ def update_q_table(state, action, next_state):
   Qvalue = (1-learning_rate) * q_table[state][action] + learning_rate(reward(STATES[state],ACTIONS[action]) + GAMMA*q_table[next_state][best_next_action])
 
   return Qvalue
+
+def play_n_episodes(n):
+  for i in range(0, n):
+    learn_episode()
