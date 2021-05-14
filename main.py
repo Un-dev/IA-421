@@ -154,6 +154,7 @@ def exploit(state):
   next_state = transition(state,action_to_play)
   return next_state
 
+# finds index in STATES of the given state
 def index_of_state(state):
   for i, item in enumerate(STATES):
     if(STATES[i][0] == state[0] and STATES[i][1] == state[1] and STATES[i][2] == state[2]):
@@ -165,11 +166,13 @@ def index_of_state(state):
   else: 
     return 9
 
+# finds index in ACTIONS of the given action
 def index_of_action(action):
   for i, item in enumerate(ACTIONS):
     if(ACTIONS[i][0] == action[0] and ACTIONS[i][1] == action[1] and ACTIONS[i][2] == action[2]):
       return i
 
+# finds the index of the best action in q_table for given state
 def best_action_index(state):
   # takes the given state and iterates over q_table's corresponding index
   state_idx = index_of_state(state)
@@ -180,8 +183,8 @@ def best_action_index(state):
   return  state_actions_values.index(max(state_actions_values))
 
 
+# changes the value of q_table for state/action couple
 def update_q_table(state, action, next_state):
-  # change the value of q_table for state/action couple
   best_next_action= best_action_index(next_state)
   Qvalue = (1-learning_rate) * q_table[state][action] + learning_rate(reward(STATES[state],ACTIONS[action]) + GAMMA*q_table[next_state][best_next_action])
 
