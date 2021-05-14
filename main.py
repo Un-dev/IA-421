@@ -99,11 +99,14 @@ def reward(state, last):
     
 
 def transition(state, action):
+  next_state = [None] * 3
   for i, item in enumerate(action):
     if (item == True):
-      state[i] = random.randint(1,6)
+      next_state[i] = random.randint(1,6)
+    else:
+      next_state[i] = state[i]
 
-  return state
+  return sorted(next_state)
 
 #chooses whether to explore or exploit
 def epsilon_greedy(e):
@@ -116,23 +119,24 @@ def epsilon_greedy(e):
 
 #avec l'etat 456 je relance le dé 2 et 3
 
-# print(transition([4, 5, 6], [False, True, True]))
+# print(transition([1, 4, 6], [False, True, False]))
 # print(reward(sorted([2, 4, 1]), last=True))
 
 def learn_episode():
   # an episode is composed of 3 rounds
   # first round where we roll every dices
-  current_state = [random.randint(1,6), random.randint(1,6), random.randint(1,6)]
+  current_state = sorted([random.randint(1,6), random.randint(1,6), random.randint(1,6)])
   # two more rounds
   for i in range(0, 2):
     if (epsilon_greedy(EPSILON)):
       # if e_greedy returns true we explore
       # print("explore")
-      current_state = explore(current_state)
+      # print(current_state)
+      current_state = sorted(explore(current_state))
     else: 
       # otherwise we exploit
       # print("exploit")
-      current_state = exploit(current_state)
+      current_state = sorted(exploit(current_state))
   return current_state
     
 
@@ -197,18 +201,21 @@ def update_q_table(state, action, next_state):
   best_next_action= best_action_index(next_state)
   state_index = index_of_state(state)
   action_index = index_of_action(action)
-  Qvalue = (1-learning_rate) * q_table[action_index][state_index] + learning_rate * (reward(state, action) + GAMMA*q_table[best_next_action][index_of_state(next_state)])
-  # print((1-learning_rate) * q_table[action][state])
-  # print(ACTIONS[action_index])
-  # print(state_index)
-  # print(STATES[state_index])
+  # print(action)
+  # print(state)
+  # print(reward(state, True))
+  # print(next_state)
+  # print(reward(next_state, True))
+  Qvalue = (1-learning_rate) * q_table[action_index][state_index] + learning_rate * (reward(state, True) + GAMMA*q_table[best_next_action][index_of_state(next_state)])
   # Qvalue = (1-learning_rate) * q_table[action_index][state_index]
   q_table[action_index][state_index] = Qvalue
+
 def play_n_episodes(n):
   for i in range(0, n):
     learn_episode()
 
 
 
+# play_n_episodes(10)
 play_n_episodes(50000)
 print_q_table()
