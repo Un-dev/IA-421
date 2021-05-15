@@ -67,9 +67,22 @@ q_table = {
 
 }
 def print_q_table():
+  line ="     "
+  for i in range(0, len(STATES)):
+    line += str(STATES[i][0]) + str(STATES[i][1]) + str(STATES[i][2]) +"   "
+  line += "11x   xxx  else"
+  print(line)
+  print("    ----------------------------------------------------------")
   for i in range(0, len(q_table.keys())):
-    line = ""
+    line = str(i) + " | "
     for j in range(0, len(q_table[i])):
+      if (int(q_table[i][j]) < 1000):
+        line += " "
+      if (int(q_table[i][j]) < 100):
+        line += " "
+      if (int(q_table[i][j]) < 10):
+        line += " "
+
       line += str(int(q_table[i][j]))+", "
     print(line)
 
@@ -217,5 +230,5 @@ def play_n_episodes(n):
 
 
 # play_n_episodes(10)
-play_n_episodes(50000)
+play_n_episodes(100000)
 print_q_table()
