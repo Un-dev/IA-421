@@ -6,12 +6,6 @@ It is an adaptation of the [421](<https://fr.wikipedia.org/wiki/421_(jeu)>) dice
 Ceci est notre projet final en apprentissage renforcé, un cours donné par Mme KARAMI.
 Il s'agit d'une adaptation du jeu du [421](<https://fr.wikipedia.org/wiki/421_(jeu)>) avec l'algorithme du Qlearning
 
-
-## Authors
-
-- [Denis D'Almeida](https://github.com/denisjunior)
-- [François Lannoy](https://github.com/Un-dev)
-
 # la fonction "print_q_table"
   elle permet d'afficher les résultats de l'apprentissage de l'agent IA
 # la fonction "reward"
@@ -26,3 +20,9 @@ Il s'agit d'une adaptation du jeu du [421](<https://fr.wikipedia.org/wiki/421_(j
   choisi un nombre aléatoirement entre 0 et 7 qui est le nombre d'action possible par dé puissance nombre de dé. L'action choisi sera donc exécuté, ensuite l'état suivant est changé et le "q_table est mise à jour
 # la fonction "exploit"
   celle ci choisi la meilleure action par dans la Qtable par rapport au state actuel.
+
+
+## Authors
+
+- [Denis D'Almeida](https://github.com/denisjunior)
+- [François Lannoy](https://github.com/Un-dev)
