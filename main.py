@@ -216,7 +216,7 @@ def play_n_episodes(n):
 
 
 # play_n_episodes(10)
-play_n_episodes(300000)
+play_n_episodes(200000)
 print_q_table()
 
 def play_a_game():
